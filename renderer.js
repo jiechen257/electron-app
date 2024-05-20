@@ -1,9 +1,8 @@
-const func = async () => {
-  const response = await window.versions.ping()
-  console.log(response)
-}
+const counter = document.getElementById('counter')
 
-func()
-
-const information = document.getElementById("info");
-information.innerText = `本应用正在使用 Chrome (v${versions.chrome()}), Node.js (v${versions.node()}), 和 Electron (v${versions.electron()})`;
+window.electronAPI.onUpdateCounter((value) => {
+  const oldValue = Number(counter.innerText)
+  const newValue = oldValue + value
+  counter.innerText = newValue.toString()
+  window.electronAPI.counterValue(newValue)
+})
